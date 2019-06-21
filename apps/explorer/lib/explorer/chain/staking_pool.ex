@@ -42,6 +42,8 @@ defmodule Explorer.Chain.StakingPool do
     staking_address_hash mining_address_hash
   )a
 
+  @derive {Poison.Encoder, only: @attrs}
+
   schema "staking_pools" do
     field(:banned_until, :integer)
     field(:delegators_count, :integer)
