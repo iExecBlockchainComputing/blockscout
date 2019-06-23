@@ -38,10 +38,18 @@ defmodule BlockScoutWeb.PoolsController do
     end
   end
 
+  def staking_contract(conn, _) do
+    staking_address = PoolsReader.get_staking_address()
+    staking_abi = PoolsReader.get_staking_abi()
+
+    json(conn, %{abi: staking_abi, address: staking_address})
+  end
+
   defp render_template(_, conn, %{"type" => "JSON", "template" => "top"}) do
     epoch_number = ContractState.get(:epoch_number, 0)
     epoch_end_block = ContractState.get(:epoch_end_block, 0)
     block_number = BlockNumberCache.max_number()
+    stakes_setting = Application.get_env(:block_scout_web, :stakes)
 
     user =
       conn
@@ -53,7 +61,8 @@ defmodule BlockScoutWeb.PoolsController do
       epoch_end_in: epoch_end_block - block_number,
       block_number: block_number,
       user: user,
-      logged_in: user != nil
+      logged_in: user != nil,
+      min_candidate_stake: stakes_setting[:min_candidate_stake]
     ]
 
     content =
@@ -122,6 +131,7 @@ defmodule BlockScoutWeb.PoolsController do
     epoch_end_block = ContractState.get(:epoch_end_block, 0)
     block_number = BlockNumberCache.max_number()
     average_block_time = AverageBlockTime.average_block_time()
+    stakes_setting = Application.get_env(:block_scout_web, :stakes)
 
     user =
       conn
@@ -136,7 +146,8 @@ defmodule BlockScoutWeb.PoolsController do
       current_path: current_path(conn),
       user: user,
       logged_in: user != nil,
-      average_block_time: average_block_time
+      average_block_time: average_block_time,
+      min_candidate_stake: stakes_setting[:min_candidate_stake]
     ]
 
     render(conn, "index.html", options)
