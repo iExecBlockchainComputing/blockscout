@@ -3,6 +3,7 @@
 ### Features
 - [#2374](https://github.com/poanetwork/blockscout/pull/2374) - decode constructor arguments for verified smart contracts
 - [#2399](https://github.com/poanetwork/blockscout/pull/2399) - decode verified smart contract's logs
+- [#2366](https://github.com/poanetwork/blockscout/pull/2366) - paginate eth logs
 - [#2379](https://github.com/poanetwork/blockscout/pull/2379) - Disable network selector when is empty
 - [#2360](https://github.com/poanetwork/blockscout/pull/2360) - add default evm version to smart contract verification
 - [#2352](https://github.com/poanetwork/blockscout/pull/2352) - Fetch rewards in parallel with transactions
