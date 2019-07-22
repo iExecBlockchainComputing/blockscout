@@ -3,7 +3,7 @@ defmodule BlockScoutWeb.StakesController do
 
   alias BlockScoutWeb.StakesView
   alias Explorer.Chain
-  alias Explorer.Chain.BlockNumberCache
+  alias Explorer.Chain.{BlockNumberCache, Wei}
   alias Explorer.Counters.AverageBlockTime
   alias Explorer.Staking.ContractState
   alias Phoenix.View
@@ -85,6 +85,49 @@ defmodule BlockScoutWeb.StakesController do
       current_path: current_path(conn),
       average_block_time: AverageBlockTime.average_block_time()
     )
+  end
+
+  defp delegator_info(address) when not is_nil(address) do
+    case Chain.delegator_info(address) do
+      %{staked: staked, self_staked: self_staked, has_pool: has_pool} ->
+        {:ok, staked_wei} = Wei.cast(staked || 0)
+        {:ok, self_staked_wei} = Wei.cast(self_staked || 0)
+
+        staked_sum = Wei.sum(staked_wei, self_staked_wei)
+        stakes_token_name = System.get_env("STAKES_TOKEN_NAME") || "POSDAO"
+
+        %{
+          address: address,
+          balance: get_token_balance(address, stakes_token_name),
+          staked: staked_sum,
+          has_pool: has_pool
+        }
+
+      _ ->
+        {:ok, zero_wei} = Wei.cast(0)
+
+        %{
+          address: address,
+          balance: zero_wei,
+          staked: zero_wei,
+          has_pool: false
+        }
+    end
+  end
+
+  defp delegator_info(_), do: nil
+
+  defp get_token_balance(address, token_name) do
+    {:ok, balance} =
+      address
+      |> Chain.address_tokens_with_balance()
+      |> Enum.find_value(Wei.cast(0), fn token ->
+        if token.name == token_name do
+          Wei.cast(token.balance)
+        end
+      end)
+
+    balance
   end
 
   defp next_page_path(:validator, conn, params) do
