@@ -124,7 +124,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/block_scout_web/templates/address/_balance_card.html.eex:3
-#: lib/block_scout_web/templates/stakes/_stakes_stats_item_account.html.eex:15
+#: lib/block_scout_web/templates/stakes/_stakes_stats_item_account.html.eex:19
 msgid "Balance"
 msgstr ""
 
@@ -380,7 +380,7 @@ msgstr ""
 #: lib/block_scout_web/templates/transaction/_pending_tile.html.eex:20
 #: lib/block_scout_web/templates/transaction/_tile.html.eex:30
 #: lib/block_scout_web/templates/transaction/overview.html.eex:192
-#: lib/block_scout_web/views/wei_helpers.ex:78
+#: lib/block_scout_web/views/wei_helpers.ex:82
 msgid "Ether"
 msgstr "POA"
 
@@ -438,7 +438,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/block_scout_web/views/block_view.ex:20
-#: lib/block_scout_web/views/wei_helpers.ex:77
+#: lib/block_scout_web/views/wei_helpers.ex:81
 msgid "Gwei"
 msgstr ""
 
@@ -984,7 +984,7 @@ msgid "Wallet addresses"
 msgstr ""
 
 #, elixir-format
-#: lib/block_scout_web/views/wei_helpers.ex:76
+#: lib/block_scout_web/views/wei_helpers.ex:80
 msgid "Wei"
 msgstr ""
 
@@ -1565,7 +1565,6 @@ msgstr ""
 #: lib/block_scout_web/templates/stakes/_stakes_empty_content.html.eex:14
 #: lib/block_scout_web/templates/stakes/_stakes_modal_become_candidate.html.eex:5
 #: lib/block_scout_web/templates/stakes/_stakes_modal_become_candidate.html.eex:20
-#: lib/block_scout_web/templates/stakes/_stakes_top.html.eex:10
 msgid "Become Candidate"
 msgstr ""
 
@@ -1621,7 +1620,7 @@ msgid "Stake More"
 msgstr ""
 
 #, elixir-format
-#: lib/block_scout_web/templates/stakes/_stakes_stats_item_account.html.eex:23
+#: lib/block_scout_web/templates/stakes/_stakes_stats_item_account.html.eex:22
 msgid "Staked"
 msgstr ""
 
@@ -1859,6 +1858,11 @@ msgstr ""
 #, elixir-format
 #: lib/block_scout_web/templates/api_docs/eth_rpc.html.eex:9
 msgid "here."
+msgstr ""
+
+#, elixir-format
+#: lib/block_scout_web/templates/stakes/_stakes_top.html.eex:13
+msgid "Become a Candidate"
 msgstr ""
 
 #, elixir-format
